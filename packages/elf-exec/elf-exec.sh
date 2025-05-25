@@ -17,11 +17,17 @@ if [ $? -ne 0 ]; then
     fi
     exit 1
 else
-    echo "You can run executables that are in the current directory, for example if you want to run busybox and have it in current directory, you can run: ./busybox <applet>"
-    printf "elf-exec>> "
-    # Wait for user to input a path
-    read -p "" path
-    # Run the executable
-    wsl sh -c "${path} && exit"
-    exit 0
+    # If there are arguments, run them
+    if [ $# -gt 0 ]; then
+        wsl sh -c "$@ && exit"
+        exit 0
+    else
+        echo "You can run executables that are in the current directory, for example if you want to run busybox and have it in current directory, you can run: ./busybox <applet>"
+        printf "elf-exec>> "
+        # Wait for user to input a path
+        read -p "" path
+        # Run the executable
+        wsl sh -c "${path} && exit"
+        exit 0
+    fi
 fi
