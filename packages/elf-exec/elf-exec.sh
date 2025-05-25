@@ -18,8 +18,7 @@ if [ $? -ne 0 ]; then
     exit 1
 else
     echo "You can run executables that are in the current directory, for example if you want to run busybox and have it in current directory, you can run: ./busybox <applet>"
-    echo "You may also run any Linux command, like for example neofetch!"
-    printf "elf-exec>> " # Using this because it doesn't create a new line
+    printf "elf-exec>> "
     # Wait for user to input a path
     read -p "" path
     # Run the executable
