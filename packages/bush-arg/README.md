@@ -1,4 +1,4 @@
-# bush
+# bush-arg
 
 [![Build Status](https://travis-ci.org/dylanaraps/bush.svg?branch=master)](https://travis-ci.org/dylanaraps/bush)
 
@@ -20,3 +20,5 @@ Make sure it's executable.
 ```sh
 chmod +x /path/to/bush/bush-arg
 ```
+
+**GitHub repository:** https://github.com/dylanaraps/bush
