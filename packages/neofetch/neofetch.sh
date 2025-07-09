@@ -961,9 +961,7 @@ get_os() {
         ;;
 
         *)
-            printf '%s\n' "Unknown OS detected: '$kernel_name', aborting..." >&2
-            printf '%s\n' "Open an issue on GitHub to add support for your OS." >&2
-            exit 1
+            os=Windows # Another change from upstream!!
         ;;
     esac
 }
