@@ -956,7 +956,7 @@ get_os() {
 
  	# Changed to include KALI-IN-BATCH_Windows_NT
   	# This is a change from upstream.
-        CYGWIN*|MSYS*|MINGW*|KALI-IN-BATCH_Windows_NT)
+        CYGWIN*|MSYS*|MINGW*|KALI-IN-BATCH*)
             os=Windows
         ;;
 
