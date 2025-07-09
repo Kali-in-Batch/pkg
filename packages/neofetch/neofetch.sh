@@ -954,7 +954,9 @@ get_os() {
             os=BSD
         ;;
 
-        CYGWIN*|MSYS*|MINGW*)
+ 	# Changed to include KALI-IN-BATCH_Windows_NT
+  	# This is a change from upstream.
+        CYGWIN*|MSYS*|MINGW*|KALI-IN-BATCH_Windows_NT)
             os=Windows
         ;;
 
@@ -4889,7 +4891,8 @@ dynamic_prompt() {
 cache_uname() {
     # Cache the output of uname so we don't
     # have to spawn it multiple times.
-    IFS=" " read -ra uname <<< "$(uname -srm)"
+    IFS=" " read -ra uname <<< "$(/usr/bin/uname.bat -s -r -m)"
+    # Changed from upstream to use uname.bat -s -r -m
 
     kernel_name="${uname[0]}"
     kernel_version="${uname[1]}"
