@@ -1,37 +1,42 @@
 #!/usr/bin/bash
 
-# Function to query registry for Git install path
 find_git_path() {
-    local paths=(
+    local keys=(
         "HKLM\\SOFTWARE\\GitForWindows"
         "HKLM\\SOFTWARE\\WOW6432Node\\GitForWindows"
         "HKCU\\SOFTWARE\\GitForWindows"
     )
 
-    for key in "${paths[@]}"; do
-        path=$(reg query "$key" /v InstallPath 2>nul | awk -FREG_SZ '{print $2}' | sed 's/^[ \t]*//')
-        if [[ -n "$path" && -x "$path\\bin\\git.exe" ]]; then
-            echo "$path\\bin\\git.exe"
-            return 0
+    for key in "${keys[@]}"; do
+        # Capture InstallPath value
+        install_path=$(reg query "$key" /v InstallPath 2>nul | tr -d '\r' | grep "InstallPath" | sed -E 's/.*REG_SZ[ \t]+//')
+        if [[ -n "$install_path" ]]; then
+            git_exe="$install_path\\bin\\git.exe"
+            # Ensure the executable exists
+            if [[ -f "$git_exe" ]]; then
+                echo "$git_exe"
+                return 0
+            fi
         fi
     done
+
     return 1
 }
 
-# Try to find git in registry
 git_path=$(find_git_path)
 
-# If not found, install using winget
 if [[ -z "$git_path" ]]; then
     echo "Git not found in registry. Installing..."
     winget install --id Git.Git -e --source winget
-    # After install, try to find again
+
+    # Wait a moment and try again
+    sleep 5
     git_path=$(find_git_path)
     if [[ -z "$git_path" ]]; then
-        echo "Git installation failed or not detected."
+        echo "Git installation failed or still not found."
         exit 1
     fi
 fi
 
-# Run git with passed arguments
+# Run git with passed args
 "$git_path" "$@"
