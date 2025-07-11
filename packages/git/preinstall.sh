@@ -1,3 +1,3 @@
 #!/bin/bash
 
-winget install -e --id Git.Git
+winget install --id Git.Git -e --source winget
