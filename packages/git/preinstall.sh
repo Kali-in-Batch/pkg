@@ -5,5 +5,5 @@ echo "Adding \"\"alias git='source /usr/bin/git'\"\" to .bashrc if not already t
 
 if ! grep -q "alias git='source /usr/bin/git'" ~/.bashrc; then
     echo "alias git='source /usr/bin/git'" >> ~/.bashrc
-    alias git='source /usr/bin/git' # For the current session
+    source ~/.bashrc
 fi
