@@ -1,9 +1,10 @@
 #!/bin/bash
 
 winget install --id Git.Git -e --source winget
-echo "Adding \"\"alias git='source /usr/bin/git'\"\" to .bashrc if not already there"
 
+echo "Adding alias to current session"
+alias git='source /usr/bin/git' # For the current session
 if ! grep -q "alias git='source /usr/bin/git'" ~/.bashrc; then
-    echo "alias git='source /usr/bin/git'" >> ~/.bashrc
-    source ~/.bashrc
+    echo "Adding alias to .bashrc"
+    echo "alias git='source /usr/bin/git'" >> ~/.bashrc # For all future sessions
 fi
