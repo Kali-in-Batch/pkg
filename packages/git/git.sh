@@ -1,7 +1,9 @@
 #!/usr/bin/bash
 
-export PATH="$PATH_OLD"
-
-git "$@"
-
-export PATH="$PATH_NEW"
+IFS=: read -ra dirs <<< "$PATH_OLD"
+for dir in "${dirs[@]}"; do
+  if [[ -x "$dir/git.exe" ]]; then
+    echo "$dir/git.exe"
+    break
+  fi
+done
