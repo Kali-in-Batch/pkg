@@ -1,10 +1,13 @@
 #!/usr/bin/bash
 
-# Extract PATH_OLD value from `export` output
-path_old=$(export | grep '^declare -x PATH_OLD=' | sed -E 's/^declare -x PATH_OLD="(.*)"$/\1/')
+# Extract the raw string with escape sequences
+raw=$(export | grep '^declare -x PATH_OLD=' | sed -E "s/^declare -x PATH_OLD=\$'(.*)'$/\1/")
 
-# Replace colons and semicolons with newlines, then check each path
-echo "$path_old" | tr ':;' '\n' | while read -r dir; do
+# Interpret escape sequences (e.g. \n) using printf
+decoded=$(printf "%b" "$raw")
+
+# Split on ':' and ';' and search for git.exe
+echo "$decoded" | tr ':;' '\n' | while read -r dir; do
   if [[ -x "$dir/git.exe" ]]; then
     echo "$dir/git.exe"
     break
