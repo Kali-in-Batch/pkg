@@ -4,4 +4,4 @@
 # Here there would be functions and variables that are used by the scripts,
 # but since this is an example, we'll just use a simple variable.
 
-string="Hello, world!"
+export string="Hello, world!"
