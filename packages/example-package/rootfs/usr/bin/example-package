@@ -2,6 +2,6 @@
 
 # Call the library
 
-busybox bash -c "C:/Users/$USERNAME/kali/usr/lib/example-package.lib"
+source "C:/Users/$USERNAME/kali/usr/lib/example-package.lib"
 
 echo "$string"
