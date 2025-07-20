@@ -1,4 +1,4 @@
-This License will not apply to any packages in the repository that contain a LICENSE file.
+This License only applies to the README.md in the repository root..
 
 Zero-Clause BSD
 =============
